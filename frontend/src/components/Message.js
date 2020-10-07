@@ -8,3 +8,5 @@ export const Message = ({ variant, children }) => {
 Message.defaultProps = {
   variant: "info",
 };
+
+export default Message;
