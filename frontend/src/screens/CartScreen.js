@@ -11,7 +11,7 @@ import {
   Card,
 } from "react-bootstrap";
 import Message from "../components/Message";
-import { addToCart } from "../actions/cartActions";
+import { addToCart, removeFromCart } from "../actions/cartActions";
 
 export const CartScreen = ({ match, location, history }) => {
   const productId = match.params.id;
@@ -27,8 +27,9 @@ export const CartScreen = ({ match, location, history }) => {
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
 
-  const removeFromCartHandler = (product) => {
-    alert("Are you sure you want to remove item from your cart?");
+  const removeFromCartHandler = (productId) => {
+    dispatch(removeFromCart(productId));
+    history.push("/cart");
   };
 
   const checkOutHandler = () => {
