@@ -8,6 +8,7 @@ import {
   userLoginReducer,
   userRegisterReducer,
   userDetailsReducer,
+  userProfileUpdateReducer,
 } from "./reducers/userReducers";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
@@ -18,6 +19,7 @@ const reducer = combineReducers({
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userProfile: userDetailsReducer,
+  userUpdateProfile: userProfileUpdateReducer,
   cart: cartReducer,
 });
 
