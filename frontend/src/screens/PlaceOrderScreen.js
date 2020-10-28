@@ -17,7 +17,16 @@ export const PlaceOrderScreen = () => {
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
 
+  cart.itemsPrice = cartItems.reduce(
+    (acc, item) => acc + item.price * item.qty,
+    0
+  );
+  cart.shippingPrice = Math.round(cart.itemsPrice * 0.02 + 10);
+  cart.taxPrice = Math.round(cart.itemsPrice * 0.01 + 3);
+  cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
+
   //const paymentMethod = useSelector((state) => state.paymentMethod);
+  const placeOrderHandler = () => {};
 
   return (
     <>
@@ -81,6 +90,40 @@ export const PlaceOrderScreen = () => {
             <ListGroup variant="flush">
               <ListGroup.Item>
                 <h2>Order Summary</h2>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <Row>
+                  <Col>Items</Col>
+                  <Col>${cart.itemsPrice}</Col>
+                </Row>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <Row>
+                  <Col>Shipping</Col>
+                  <Col>${cart.shippingPrice}</Col>
+                </Row>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <Row>
+                  <Col>Tax</Col>
+                  <Col>${cart.taxPrice}</Col>
+                </Row>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <Row>
+                  <Col>Total</Col>
+                  <Col>${cart.totalPrice}</Col>
+                </Row>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <Button
+                  type="button"
+                  className="btn-block"
+                  disabled={cartItems === 0}
+                  onClick={placeOrderHandler}
+                >
+                  Place Order
+                </Button>
               </ListGroup.Item>
             </ListGroup>
           </Card>
