@@ -13,6 +13,7 @@ import {
 import {
   orderCreateReducer,
   orderDetailsReducer,
+  orderPayReducer,
 } from "./reducers/orderReducers";
 
 import thunk from "redux-thunk";
@@ -28,6 +29,7 @@ const reducer = combineReducers({
   cart: cartReducer,
   orderCreate: orderCreateReducer,
   orderDetail: orderDetailsReducer,
+  orderPay: orderPayReducer,
 });
 
 const cartItemsFromStorage = localStorage.getItem("cartItems")
