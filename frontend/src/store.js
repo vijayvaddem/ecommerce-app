@@ -14,6 +14,7 @@ import {
   orderCreateReducer,
   orderDetailsReducer,
   orderPayReducer,
+  myOrdersListReducer,
 } from "./reducers/orderReducers";
 
 import thunk from "redux-thunk";
@@ -30,6 +31,7 @@ const reducer = combineReducers({
   orderCreate: orderCreateReducer,
   orderDetail: orderDetailsReducer,
   orderPay: orderPayReducer,
+  myOrdersList: myOrdersListReducer,
 });
 
 const cartItemsFromStorage = localStorage.getItem("cartItems")

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { profile, updateUserProfile } from "../actions/userActions";
+import {} from "../actions/orderActions";
 
 const ProfileScreen = ({ location, history }) => {
   const [name, setName] = useState("");
@@ -22,6 +23,13 @@ const ProfileScreen = ({ location, history }) => {
 
   const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
   const { success } = userUpdateProfile;
+
+  const myOrdersList = useSelector((state) => state.myOrdersList);
+  const {
+    loading: loadingMyOrders,
+    error: errorMyOrders,
+    myOrders,
+  } = myOrdersList;
 
   useEffect(() => {
     console.log("userInfo:", userInfo);
