@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { profile, updateUserProfile } from "../actions/userActions";
-import {} from "../actions/orderActions";
+import { getMyOrders } from "../actions/orderActions";
 
 const ProfileScreen = ({ location, history }) => {
   const [name, setName] = useState("");
@@ -36,8 +36,11 @@ const ProfileScreen = ({ location, history }) => {
     if (!userInfo) {
       history.push("/login");
     } else {
+      console.log("In else block");
       if (!user.name) {
+        console.log("In if block");
         dispatch(profile("profile"));
+        dispatch(getMyOrders());
       } else {
         setName(user.name);
         setEmail(user.email);

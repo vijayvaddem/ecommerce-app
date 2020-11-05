@@ -129,7 +129,7 @@ export const getMyOrders = () => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    const { data } = await axios.put(`/api/orders/myorders`, config);
+    const { data } = await axios.get(`/api/orders/myorders`, config);
     dispatch({ type: MY_ORDERS_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
