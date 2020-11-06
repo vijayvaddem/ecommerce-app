@@ -2,6 +2,7 @@ import axios from "axios";
 import {
   MY_ORDERS_FAIL,
   MY_ORDERS_REQUEST,
+  MY_ORDERS_RESET,
   MY_ORDERS_SUCCESS,
   ORDER_CREATE_FAIL,
   ORDER_CREATE_REQUEST,
@@ -140,4 +141,10 @@ export const getMyOrders = () => async (dispatch, getState) => {
           : error.message,
     });
   }
+};
+
+export const resetMyOrders = () => (dispatch) => {
+  dispatch({
+    type: MY_ORDERS_RESET,
+  });
 };
