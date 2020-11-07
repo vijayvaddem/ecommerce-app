@@ -22,6 +22,7 @@ const authUser = asyncHandler(async (req, res) => {
     throw new Error("Invalid email or password");
   }
 });
+
 // @desc   Create a new user
 // @route  POST /api/users
 // @access Public
@@ -72,6 +73,14 @@ const getUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc   get all users
+// @route  GET /api/users
+// @access Private/admin
+const getUsers = asyncHandler(async (req, res) => {
+  const users = await User.find({});
+  res.json(users);
+});
+
 // @desc   Update user profile
 // @route  PUT /api/users/profile
 // @access Private
@@ -97,4 +106,4 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
-export { authUser, getUserProfile, registerUser, updateUserProfile };
+export { authUser, getUserProfile, registerUser, updateUserProfile, getUsers };
