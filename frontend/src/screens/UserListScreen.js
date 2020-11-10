@@ -53,7 +53,7 @@ const UserListScreen = ({ history }) => {
                   <td>{user._id}</td>
                   <td>{user.name}</td>
                   <td>{user.email}</td>
-                  <td>{user.isAdmin}</td>
+                  <td>{user.isAdmin ? "True" : "False"}</td>
                   <td>
                     <LinkContainer to={`/users/user/${user._id}/edit`}>
                       <Button variant="light" className="btn-sm">
