@@ -16,7 +16,12 @@ const Header = () => {
 
   return (
     <header>
-      <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
+      <Navbar
+        style={styles.colornav}
+        variant="light"
+        expand="lg"
+        collapseOnSelect
+      >
         <Container>
           <LinkContainer to="/">
             <Navbar.Brand>ProShop</Navbar.Brand>
@@ -57,6 +62,12 @@ const Header = () => {
       </Navbar>
     </header>
   );
+};
+
+const styles = {
+  colornav: {
+    backgroundColor: "#72cbf1",
+  },
 };
 
 export default Header;
