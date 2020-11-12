@@ -3,7 +3,7 @@ import { Form, Button, Row, Col, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
-import { profile, updateUserProfile } from "../actions/userActions";
+import { getUserDetails, updateUserProfile } from "../actions/userActions";
 import { getMyOrders } from "../actions/orderActions";
 import { LinkContainer } from "react-router-bootstrap";
 
@@ -16,8 +16,8 @@ const ProfileScreen = ({ location, history }) => {
 
   const dispatch = useDispatch();
 
-  const userProfile = useSelector((state) => state.userProfile);
-  const { loading, error, user } = userProfile;
+  const userDetails = useSelector((state) => state.userDetails);
+  const { loading, error, user } = userDetails;
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -38,9 +38,8 @@ const ProfileScreen = ({ location, history }) => {
       history.push("/login");
     } else {
       console.log("In else block");
-      if (!user.name) {
-        console.log("In if block");
-        dispatch(profile("profile"));
+      if (!user || !user.name || success) {
+        dispatch(getUserDetails("profile"));
         dispatch(getMyOrders());
       } else {
         setName(user.name);
