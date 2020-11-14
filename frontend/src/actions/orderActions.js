@@ -115,7 +115,6 @@ export const payOrder = (orderId, paymentResult) => async (
 };
 
 export const getMyOrders = () => async (dispatch, getState) => {
-  console.log("Getting orders list");
   try {
     dispatch({
       type: MY_ORDERS_REQUEST,
