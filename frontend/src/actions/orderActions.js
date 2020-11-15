@@ -1,5 +1,8 @@
 import axios from "axios";
 import {
+  ALL_ORDERS_FAIL,
+  ALL_ORDERS_REQUEST,
+  ALL_ORDERS_SUCCESS,
   MY_ORDERS_FAIL,
   MY_ORDERS_REQUEST,
   MY_ORDERS_RESET,
@@ -135,6 +138,34 @@ export const getMyOrders = () => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: MY_ORDERS_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+export const getAllOrders = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: ALL_ORDERS_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+    const { data } = await axios.get(`/api/orders/`, config);
+    dispatch({ type: ALL_ORDERS_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: ALL_ORDERS_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
