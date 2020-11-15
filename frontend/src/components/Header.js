@@ -45,9 +45,14 @@ const Header = () => {
                     </LinkContainer>
                   )}
                   {userInfo.isAdmin && (
-                    <LinkContainer to="/admin/products">
-                      <NavDropdown.Item>Products</NavDropdown.Item>
-                    </LinkContainer>
+                    <>
+                      <LinkContainer to="/admin/products">
+                        <NavDropdown.Item>Products</NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to="/admin/orders">
+                        <NavDropdown.Item>Orders</NavDropdown.Item>
+                      </LinkContainer>
+                    </>
                   )}
                   <NavDropdown.Divider />
                   <NavDropdown.Item onClick={logoutHandler}>
