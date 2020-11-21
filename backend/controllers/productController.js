@@ -40,12 +40,23 @@ const deleteProduct = asyncHandler(async (req, res) => {
 // @route  POST /api/products/
 // @access Private / Admin
 const createProduct = asyncHandler(async (req, res) => {
+  const {
+    name,
+    image,
+    description,
+    brand,
+    category,
+    price,
+    countInStock,
+    rating,
+    numReviews,
+  } = req.body;
+
   const product = new Product({
-    name: "iPhone 12 Pro",
+    name: name,
     image: "/images/phone.jpg",
     user: req.user._id,
-    description:
-      "Introducing the iPhone 12 Pro. A transformative triple-camera system that adds tons of capability without complexity. An unprecedented leap in battery life",
+    description: description,
     brand: "Apple",
     category: "Electronics",
     price: 799.99,
