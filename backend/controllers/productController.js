@@ -36,4 +36,62 @@ const deleteProduct = asyncHandler(async (req, res) => {
   }
 });
 
-export { getProducts, getProductById, deleteProduct };
+// @desc   Create a product
+// @route  POST /api/products/
+// @access Private / Admin
+const createProduct = asyncHandler(async (req, res) => {
+  const product = new Product({
+    name: "iPhone 12 Pro",
+    image: "/images/phone.jpg",
+    user: req.user._id,
+    description:
+      "Introducing the iPhone 12 Pro. A transformative triple-camera system that adds tons of capability without complexity. An unprecedented leap in battery life",
+    brand: "Apple",
+    category: "Electronics",
+    price: 799.99,
+    countInStock: 7,
+    rating: 4.9,
+    numReviews: 18,
+  });
+
+  const createdProduct = await product.save();
+  res.status(201).json(createdProduct);
+});
+// @desc   Update an existing product
+// @route  PUT /api/products/:id
+// @access Private / Admin
+const updateProduct = asyncHandler(async (req, res) => {
+  const {
+    name,
+    image,
+    description,
+    brand,
+    category,
+    price,
+    countInStock,
+    rating,
+    numReviews,
+  } = req.body;
+  const product = await Product.findById(req.params.id);
+  if (product) {
+    product.name = name;
+    product.image = image;
+    product.description = description;
+    product.brand = brand;
+    product.category = category;
+    product.price = price;
+    product.countInStock = countInStock;
+    product.rating = rating;
+    product.numReviews = numReviews;
+  }
+  const updatedProduct = await product.save();
+  res.status(201).json(updatedProduct);
+});
+
+export {
+  getProducts,
+  getProductById,
+  deleteProduct,
+  createProduct,
+  updateProduct,
+};
