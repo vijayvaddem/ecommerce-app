@@ -32,7 +32,7 @@ const ProductListScreen = ({ history }) => {
 
   const createProductHandler = (product) => {
     console.log("Add product clicked");
-    history.push("/productcreate");
+    history.push("/admin/productcreate");
   };
 
   const deleteProductHandler = (id) => {
