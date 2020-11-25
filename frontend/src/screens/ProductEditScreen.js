@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
-import { listProductDetails } from "../actions/productActions";
+import { listProductDetails, updateProduct } from "../actions/productActions";
 import { PRODUCT_UPDATE_RESET } from "../constants/productConstants";
 
 const ProductEditScreen = ({ match, history }) => {
@@ -23,7 +23,17 @@ const ProductEditScreen = ({ match, history }) => {
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
 
+  const productUpdate = useSelector((state) => state.productUpdate);
+  const {
+    loading: loadingUpdate,
+    error: errorUpdate,
+    success: successUpdate,
+  } = productUpdate;
+
   useEffect(() => {
+    //call update if 'successUpdate' is true
+    if (successUpdate) {
+    }
     if (!product.name || product._id !== productId) {
       dispatch(listProductDetails(productId));
     } else {
@@ -39,7 +49,18 @@ const ProductEditScreen = ({ match, history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    // dispatch(updateUser({ _id: productId, name, email, isAdmin }));
+    dispatch(
+      updateProduct({
+        _id: productId,
+        name,
+        description,
+        price,
+        brand,
+        category,
+        countInStock,
+        image,
+      })
+    );
   };
 
   return (
