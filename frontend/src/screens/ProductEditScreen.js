@@ -33,19 +33,22 @@ const ProductEditScreen = ({ match, history }) => {
   useEffect(() => {
     //call update if 'successUpdate' is true
     if (successUpdate) {
-    }
-    if (!product.name || product._id !== productId) {
-      dispatch(listProductDetails(productId));
+      dispatch({ type: PRODUCT_UPDATE_RESET });
+      history.push("/admin/products");
     } else {
-      setName(product.name);
-      setDescription(product.description);
-      setPrice(product.price);
-      setBrand(product.brand);
-      setCategory(product.category);
-      setCountInStock(product.countInStock);
-      setImage(product.image);
+      if (!product.name || product._id !== productId) {
+        dispatch(listProductDetails(productId));
+      } else {
+        setName(product.name);
+        setDescription(product.description);
+        setPrice(product.price);
+        setBrand(product.brand);
+        setCategory(product.category);
+        setCountInStock(product.countInStock);
+        setImage(product.image);
+      }
     }
-  }, [dispatch, productId, product, history]);
+  }, [dispatch, productId, product, history, successUpdate]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -70,6 +73,8 @@ const ProductEditScreen = ({ match, history }) => {
       </Link>
       <FormContainer>
         <h1>Edit product detail</h1>
+        {loadingUpdate && <Loader />}
+        {errorUpdate && <Message variant="danger">{errorUpdate}</Message>}
         {loading ? (
           <Loader />
         ) : error ? (
