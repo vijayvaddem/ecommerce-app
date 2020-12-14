@@ -35,8 +35,8 @@ const App = () => {
           <Route path="/admin/user/:id/edit" component={UserEditScreen} />
           <Route path="/admin/products" component={ProductListScreen} />
           <Route path="/admin/productcreate" component={ProductCreateScreen} />
-          <Route path="/admin/orders" component={OrdersListScreen} />
           <Route path="/admin/product/:id/edit" component={ProductEditScreen} />
+          <Route path="/admin/orders" component={OrdersListScreen} />
           <Route path="/admin/dashboard" component={DashboardScreen} />
           <Route path="/shipping" component={ShippingScreen} />
           <Route path="/payment" component={PaymentScreen} />
